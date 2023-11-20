@@ -1,3 +1,6 @@
+import csv
+import urllib.request
+
 class Item:
     def __init__(self, nome, descricao, condicao, foto=None):
         self.codigo = self.gerar_codigo()
@@ -34,6 +37,32 @@ def cadastrar_item():
 
     print("\nItem cadastrado com sucesso:")
     novo_item.exibir_detalhes()
+
+    # Salvando em CSV
+    salvar_em_csv([novo_item], 'itens.csv')
+    print("Dados salvos em itens.csv")
+
+    # Salvando em TXT
+    salvar_em_txt([novo_item], 'itens.txt')
+    print("Dados salvos em itens.txt")
+
+def salvar_em_csv(itens, nome_arquivo):
+    with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+        escritor_csv = csv.writer(arquivo_csv)
+        escritor_csv.writerow(["Código", "Nome", "Descrição", "Condição", "Foto"])
+        for item in itens:
+            escritor_csv.writerow([item.codigo, item.nome, item.descricao, item.condicao, item.foto])
+
+def salvar_em_txt(itens, nome_arquivo):
+    with open(nome_arquivo, 'w') as arquivo_txt:
+        for item in itens:
+            arquivo_txt.write(f"Código: {item.codigo}\n")
+            arquivo_txt.write(f"Nome: {item.nome}\n")
+            arquivo_txt.write(f"Descrição: {item.descricao}\n")
+            arquivo_txt.write(f"Condição: {item.condicao}\n")
+            if item.foto:
+                arquivo_txt.write(f"Foto: {item.foto}\n")
+            arquivo_txt.write("\n")
 
 def main():
     cadastrar_item()
