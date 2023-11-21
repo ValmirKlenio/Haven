@@ -1,24 +1,27 @@
-def verifica_itens():
-  item = input('Item que deseja verificar: ')
-  condicao = input('Condição: ')
-  while item not in itens_cadastrados:
-    print('Item não cadastrado! Verifique novamente ou cadastre o item.')
-    break
-  if condicao == 'Novo' or condicao == 'novo':
-    credito_item = '50'
-    print('Produto NOVO, em ótimas condições!')
-    print('APROVADO PARA DOAÇÃO')
-    pontuacao = input('Atribua uma pontuação para esse produto: ')
-  elif condicao == 'Seminovo' or condicao == 'seminovo':
-    credito_item = '35'
-    print('Produto SEMINOVO, em boas condições')
-    print('APROVADO PARA TROCA')
-    pontuacao = input('Atribua uma pontuação para esse produto: ')
-  elif condicao == 'Usado' or condicao == 'usado':
-    credito_item = '15'
-    print(f'Produto USADO, mas conservado.')
-    print('APROVADO PARA DOAÇÃO')
-    pontuacao = input('Atribua uma pontuação para esse produto: ')
+itens_cadastrados = []
+    
+def avaliar_doacao(item, condicao, pontuacao itens_cadastrados):
+  condicoes_aceitaveis = ["novo", "usado", "em bom estado"]
+  item = input('Item que dese doar: ')
+  condicoes = input('Qual a condição do item? ')
+  while condicoes.lower() not in condicoes_aceitaveis:
+    print('Desculpe, a condição do item não é aceitável para doação.')
+    return False
+  if item.lower() in itens_cadastrados:
+    print('Ótimo! O item é desejado para doação.')
+    return True
   else:
-    print('Condição inválida! O produto não tem chances de ser vendido. Seu estado não é bom!')
-    print('NÃO APROVADO')
+    print("O item não está na lista de itens desejados para doação.")
+    return False
+
+# Exemplo de uso da função
+item_doado = "roupa"
+condicao_item = "usado"
+itens_desejados = ["roupa", "brinquedo", "alimento"]
+
+doacao = avaliar_doacao(item_doado, condicao_item, itens_desejados)
+
+if doacao:
+  print('Pode doar o item)
+else:
+  print('Infelizmente, o item não pode ser doado neste momento.')
