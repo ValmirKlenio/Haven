@@ -1,20 +1,27 @@
-def cadastro_itens():
-  item = input('Item: ')
-  categoria = input('Categoria: ')
-  preço = float(input('Preço: '))
-  estoque.append({'Item': item, 'Categoria': categoria, 'Preço': preço})
-  print(estoque)
-  if item in estoque:
-    print(f'A quantidade do item no estoque é {len(item)}')
+class GestorEstoque:
+  def __init__(self, estoque_inicial):
+    self.estoque = estoque_inicial
 
-def vendas():
-  item = input('Item: ')
-  for i in estoque:
-    item, categoria, preco = i
-    print(i)
-    print(f'Item disponível no estoque!')
-    opc = int(input('Deseja comprá-lo? '))
-    if opc == 'Ss' or opc == 'SIM' or opc == 'Sim' or opc == 'sim':
-      estoque.remove(i)
-  else:
-    print('Item não encontrado')
+  def vender_produto(self, item, quantidade):
+    item = input('Item: ')
+    quantidade = int(input('Quantidade: '))
+    if item in self.estoque and self.estoque[item] >= quantidade:
+      self.estoque[item] -= quantidade
+      print(f"Venda concluída! {quantidade} unidades de {item} vendidas.")
+      print(f"Estoque restante de {item}: {self.estoque[item]} unidades.")
+      return True
+    else:
+      print(f"Desculpe, não há estoque suficiente de {item}. Venda não concluída.")
+      return False
+
+# Exemplo de uso da função
+estoque_inicial = {"camiseta": 50, "calca": 30, "sapato": 20}
+gestor_estoque = GestorEstoque(estoque_inicial)
+
+# Vende 10 unidades de camiseta
+venda = gestor_estoque.vender_produto("camiseta", 10)
+
+if venda:
+  print("Venda bem-sucedida!")
+else:
+  print("A venda não pôde ser concluída devido à falta de estoque.")
