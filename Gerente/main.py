@@ -53,7 +53,6 @@ class Gerente:
     def balanco_vendas(self, data_inicio, data_fim, categoria=None, valor_min=None, valor_max=None):
         vendas_filtradas = []
 
-        # Converta as strings de data para objetos datetime
         data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')
         data_fim = datetime.strptime(data_fim, '%Y-%m-%d')
 
