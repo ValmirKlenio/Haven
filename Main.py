@@ -158,7 +158,7 @@ class SistemaDoacao:
 
 # módulo 7
 
-# módulo 8 #REVISAR
+# módulo 8
 def cadastro_itens():
   item = input('Item: ')
   categoria = input('Categoria: ')
